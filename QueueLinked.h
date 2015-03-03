@@ -86,13 +86,17 @@ void QueueLinked<T>::enqueue(T* item)
     NextNode<T>* node = new NextNode<T>(item);
 
     //DO THIS (enqueueing the first item is a special case)
-
-
-
-
-
-
-
+	
+	if (sze == 0)
+	{
+		back = node;
+	}
+	
+	else
+	{
+		back->setNext(node);
+		back = node;
+	}
 
 
     sze++;
@@ -105,19 +109,20 @@ T* QueueLinked<T>::dequeue()
 
     //DO THIS (dequeueing the last item is a special case)
     //also, check that there are items before dequeueing
+	if (!isEmpty())
+	{
+		if (sze == 1)
+		{
+			delete back;
+			back = NULL;
+			return item;
+		}
+		
+		item = back->getNext();
+		back->setNext(item->getNext());
+	}
 
-
-
-
-
-
-
-
-
-
-
-
-
+	sze--;
     return item;
 }
 
