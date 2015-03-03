@@ -1,8 +1,8 @@
 AutomatedMakefile = am
 CC = g++
 
-FILES = 
-EXECUTABLE = 
+FILES = Problem22_1.o RecursiveIntegration.o RombergIntegration.o
+EXECUTABLE = Problem.exe
 
 PROJECT_PATH = $(PROJECT_DIR)
 
@@ -18,4 +18,11 @@ all: Project
 Project: 		$(FILES)
 			$(LINK) $(EXECUTABLE) $(FILES) $(LIBS)
 
+Problem22_1.o:	Problem22_1.h	Problem22_1.cpp
+				$(COMPILE)	Problem22_1.cpp
 
+RecursiveIntegration.o:	RecursiveIntegration.h	MultiVarFunction.h	RecursiveIntegration.cpp
+				$(COMPILE)	RecursiveIntegration.cpp
+
+RombergIntegration.o:	RombergIntegration.h	QueueLinked.h	RombergIntegration.cpp
+				$(COMPILE)	RombergIntegration.cpp
