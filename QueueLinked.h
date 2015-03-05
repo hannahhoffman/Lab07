@@ -89,11 +89,12 @@ void QueueLinked<T>::enqueue(T* item)
 	
 	if (sze == 0)
 	{
+		node->setNext(node);
 		back = node;
 	}
-	
 	else
 	{
+	    node->setNext(back->getNext());
 		back->setNext(node);
 		back = node;
 	}
@@ -105,6 +106,7 @@ void QueueLinked<T>::enqueue(T* item)
 template < class T >
 T* QueueLinked<T>::dequeue()
 {
+    NextNode<T>* front;
     T* item = NULL;
 
     //DO THIS (dequeueing the last item is a special case)
@@ -113,16 +115,20 @@ T* QueueLinked<T>::dequeue()
 	{
 		if (sze == 1)
 		{
+		    item=back->getItem();
 			delete back;
 			back = NULL;
+			sze--;
 			return item;
 		}
 		
-		item = back->getNext();
-		back->setNext(item->getNext());
+		front = back->getNext();
+		item=front->getItem();
+		back->setNext(front->getNext());
+		delete front;
+		sze--;
 	}
-
-	sze--;
+	
     return item;
 }
 
